@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="content-title">Position List</h2>
+      <a href="{% url 'tasks:position-create' %}" class="btn btn-primary position-create-btn">
+        Add
+      </a>
+    </div>
+
+    <table class="position-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Workers</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for position in position_list %}
+          <tr>
+            <td class="col-1">{{ position.name }}</td>
+            <td class="col-3">
+              {% if position.workers.all %}
+                {% for worker in position.workers.all %}
+                  <span class="position-worker-badge"><a href="{% url "tasks:worker-detail" pk=worker.id %} " style="text-decoration: none; color: white">{{ worker.username }}</a></span>
+                {% endfor %}
+              {% else %}
+                <span class="position-no-workers">No workers</span>
+              {% endif %}
+            </td>
+            <td class="col-1">
+              <a href="{% url 'tasks:position-update' position.pk %}" class="btn btn-sm position-edit-btn">Edit</a>
+              <a href="{% url 'tasks:position-delete' position.pk %}" class="btn btn-sm position-delete-btn">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
