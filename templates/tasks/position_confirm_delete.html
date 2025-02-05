@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="content">
+    <h2 class="content-title">Delete Position</h2>
+    <p>Are you sure you want to delete the position "{{ position.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger" style="white-space: nowrap;">Yes</button>
+      <a href="{% url 'tasks:position-list' %}" class="btn btn-secondary" style="white-space: nowrap;">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

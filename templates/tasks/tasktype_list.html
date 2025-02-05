@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="content-title">Task Types</h2>
+      <a href="{% url 'tasks:task-type-create' %}" class="btn btn-primary tasktype-create-btn">
+  Add
+</a>
+    </div>
+
+    <table class="tasktype-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tasktype in tasktype_list %}
+          <tr>
+            <td>{{ tasktype.name }}</td>
+            <td class="col-2">
+              <a href="{% url 'tasks:task-type-update' tasktype.pk %}" class="btn btn-sm tasktype-edit-btn">Edit</a>
+              <a href="{% url 'tasks:task-type-delete' tasktype.pk %}" class="btn btn-sm tasktype-delete-btn">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
