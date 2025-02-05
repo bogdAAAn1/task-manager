@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class Position(models.Model):
@@ -24,6 +25,8 @@ class Worker(AbstractUser):
         null=True
     )
 
+    def get_absolute_url(self):
+        return reverse("tasks:worker-detail", kwargs={"pk": self.pk})
 
 class Task(models.Model):
     PRIORITY_CHOICES = [
@@ -48,3 +51,6 @@ class Task(models.Model):
         on_delete=models.CASCADE
     )
     assignees = models.ManyToManyField(Worker, related_name="assigned_tasks")
+
+    class Meta:
+        ordering = ["is_completed", "-priority", "-deadline", ]
