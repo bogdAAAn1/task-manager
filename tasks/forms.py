@@ -12,7 +12,16 @@ class WorkerCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = Worker
-        fields = ["username", "first_name", "last_name", "email", "position"]
+        fields = UserCreationForm.Meta.fields + (
+            "username",
+            "password1",
+            "password2",
+            "first_name",
+            "last_name",
+            "email",
+            "position"
+        )
+
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
