@@ -36,9 +36,26 @@ class WorkerUpdateForm(forms.ModelForm):
         widget=forms.Select(attrs={"class": "form-control"}),
     )
 
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        required=False,
+        label="New password"
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
+        required=False,
+        label="Confirm new password"
+    )
+
     class Meta:
         model = Worker
-        fields = ["username", "first_name", "last_name", "email", "position"]
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "position"
+        ]
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
