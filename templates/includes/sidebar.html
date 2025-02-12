@@ -28,12 +28,14 @@
       </a>
     </li>
   </ul>
-  <div class="sidebar-footer">
-    <form action="{% url 'logout' %}" method="post" class="text-center">
-      {% csrf_token %}
-      <button class="logout-button btn btn-danger" type="submit" style="white-space: nowrap;">
-        <span class="logout-text">Log out</span>
-      </button>
-    </form>
-  </div>
+  {% if user.is_authenticated %}
+    <div class="sidebar-footer">
+      <form action="{% url 'logout' %}" method="post" class="text-center">
+        {% csrf_token %}
+        <button class="logout-button btn btn-danger" type="submit" style="white-space: nowrap;">
+          <span class="logout-text">Log out</span>
+        </button>
+      </form>
+    </div>
+  {% endif %}
 </aside>
